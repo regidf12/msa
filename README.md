@@ -10,7 +10,7 @@ You can follow me on my social networks:
 
 :blue_book: [Facebook](https://www.facebook.com/profile.php?id=100023988285502)
 
-# White-prince Smart assistant :robot:
+# White-prince Smart assistant :robot: :loud_sound:
 
 The voice assistant will help you with the simplest tasks
 
