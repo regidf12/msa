@@ -108,7 +108,6 @@ def use_offline_recognition():
                 recognized_data = offline_recognizer.Result()
 
                 # получение данных распознанного текста из JSON-строки
-                # (чтобы можно было выдать по ней ответ)
                 recognized_data = json.loads(recognized_data)
                 recognized_data = recognized_data["text"]
     except:
