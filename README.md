@@ -1,6 +1,6 @@
 # Welcome to White-prince :crown:
 
-![White prince](https://ibb.co/zFy2gbq)
+![White prince](https://i.ibb.co/LrLgy6V/logogitorg.png)
 
 You can follow me on my social networks:
 
