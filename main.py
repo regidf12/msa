@@ -1,3 +1,4 @@
+from js2py.translators import translator
 from vosk import Model, KaldiRecognizer  # оффлайн-распознавание от Vosk
 from pyowm import OWM  # использование OpenWeatherMap для получения данных о погоде
 from termcolor import colored  # вывод цветных логов (для выделения распознанной речи)
@@ -148,8 +149,15 @@ def search_for_video_on_youtube(*args: tuple):
     play_voice_assistant_speech("Here is what I found for " + search_term + "on youtube")
 
 
-def play_greetings():
-    play_voice_assistant_speech("Здравствуйте")
+def play_greetings(*args: tuple):
+    """
+    Проигрывание случайной приветственной речи
+    """
+    greetings = [
+        translator.get("Hello, {}! How can I help you today?").format(person.name),
+        translator.get("Good day to you {}! How can I help you today?").format(person.name)
+    ]
+    play_voice_assistant_speech(greetings[random.randint(0, len(greetings) - 1)])
 
 
 def play_farewell_and_quit():
@@ -211,8 +219,8 @@ if __name__ == "__main__":
         # старт записи речи с последующим выводом распознанной речи и удалением записанного в микрофон аудио
         voice_input = record_and_recognize_audio()
         os.remove("microphone-results.wav")
+        print(voice_input)
 
-        # отделение комманд от дополнительной информации (аргументов)
         voice_input = voice_input.split(" ")
         command = voice_input[0]
         command_options = [str(input_part) for input_part in voice_input[1:len(voice_input)]]
