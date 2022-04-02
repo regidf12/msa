@@ -1,9 +1,7 @@
 from vosk import Model, KaldiRecognizer
-from googlesearch import search
 from pyowm import OWM
 from dotenv import load_dotenv
 import speech_recognition
-import googletrans
 import pyttsx3
 import wikipediaapi
 import random
@@ -37,7 +35,7 @@ class OwnerPerson:
     """
     Информация о владельце
     """
-    name = "###"
+    name = "White-prince"
     home_city = "Moscow"
     native_language = "en"
     target_language = "ru"
@@ -49,8 +47,8 @@ class VoiceAssistant:
     """
     name = "Jeanne"
     sex = "17"
-    speech_language = "en"
-    recognition_language = "ru"
+    speech_language = "ru"
+    recognition_language = "en"
 
 
 def setup_assistant_voice():
@@ -70,7 +68,7 @@ def setup_assistant_voice():
         ttsEngine.setProperty("voice", voices[0].id)
 
 
-def record_and_recognize_audio(*args: tuple):
+def record_and_recognize_audio(*args):
     """
     Запись и распознавание аудио
     """
@@ -148,7 +146,7 @@ def play_voice_assistant_speech(text_to_speech):
     ttsEngine.runAndWait()
 
 
-def play_greetings(*args: tuple):
+def play_greetings(*args):
     """
     Проигрывание случайной приветственной речи
     """
@@ -159,7 +157,7 @@ def play_greetings(*args: tuple):
     play_voice_assistant_speech(greetings[random.randint(0, len(greetings) - 1)])
 
 
-def play_farewell_and_quit(*args: tuple):
+def play_farewell_and_quit(*args):
     """
     Проигрывание прощательной речи и выход
     """
@@ -172,31 +170,18 @@ def play_farewell_and_quit(*args: tuple):
     quit()
 
 
-def search_for_term_on_google(*args: tuple):
+def search_for_term_on_google(*args):
     """
     Поиск в Google с автоматическим открытием ссылок
     """
-    if not args[0]: return
+    if not args[0]:
+        return
     search_term = " ".join(args[0])
 
     # открытие ссылки на поисковик в браузере
     url = "https://google.com/search?q=" + search_term
     webbrowser.get().open(url)
 
-    # альтернативный поиск с автоматическим открытием ссылок на результаты
-    search_results = []
-    try:
-        for _ in search():
-            search_results.append(_)
-            webbrowser.get().open(_)
-
-    # поскольку все ошибки предсказать сложно, то будет произведен отлов с последующим выводом без остановки программы
-    except:
-        play_voice_assistant_speech(translator.get("Oops"))
-        traceback.print_exc()
-        return
-
-    print(search_results)
     play_voice_assistant_speech(translator.get("Here is what I found for {} on google").format(search_term))
 
 
@@ -204,7 +189,8 @@ def search_for_video_on_youtube(*args: tuple):
     """
     Поиск видео на YouTube с автоматическим открытием ссылки на список результатов
     """
-    if not args[0]: return
+    if not args[0]:
+        return
     search_term = " ".join(args[0])
     url = "https://www.youtube.com/results?search_query=" + search_term
     webbrowser.get().open(url)
@@ -245,56 +231,7 @@ def search_for_definition_on_wikipedia(*args: tuple):
         return
 
 
-def get_translation(*args: tuple):
-    """
-    Получение перевода текста с одного языка на другой
-    """
-    if not args[0]: return
-
-    search_term = " ".join(args[0])
-    google_translator = googletrans.Translator()
-    translation_result = ""
-
-    old_assistant_language = assistant.speech_language
-    try:
-        # если язык речи ассистента и родной язык пользователя различаются, то перевод выполяется на родной язык
-        if assistant.speech_language != person.native_language:
-            translation_result = google_translator.translate(search_term,  # что перевести
-                src=person.target_language,  # с какого языка
-                dest=person.native_language)  # на какой язык
-
-            play_voice_assistant_speech("The translation for {} in Russian is".format(search_term))
-
-            # смена голоса ассистента на родной язык пользователя (чтобы можно было произнести перевод)
-            assistant.speech_language = person.native_language
-            setup_assistant_voice()
-
-        # если язык речи ассистента и родной язык пользователя одинаковы, то перевод выполяется на изучаемый язык
-        else:
-            translation_result = google_translator.translate(search_term,  # что перевести
-                src=person.native_language,  # с какого языка
-                dest=person.target_language)  # на какой язык
-            play_voice_assistant_speech("По-английски {} будет как".format(search_term))
-
-            # смена голоса ассистента на изучаемый язык пользователя
-            assistant.speech_language = person.target_language
-            setup_assistant_voice()
-
-        # произнесение перевода
-        play_voice_assistant_speech(translation_result.text)
-
-    # поскольку все ошибки предсказать сложно, то будет произведен отлов с последующим выводом без остановки программы
-    except "":
-        play_voice_assistant_speech(translator.get("Oops"))
-        traceback.print_exc()
-
-    finally:
-        # возвращение преждних настроек голоса помощника
-        assistant.speech_language = old_assistant_language
-        setup_assistant_voice()
-
-
-def get_weather_forecast(*args: tuple):
+def get_weather_forecast(*args):
     """
     Получение и озвучивание прогнза погоды
     """
@@ -343,7 +280,7 @@ def get_weather_forecast(*args: tuple):
     play_voice_assistant_speech(translator.get("The pressure is {} mm Hg").format(str(pressure)))
 
 
-def change_language(*args: tuple):
+def change_language(*args):
     """
     Изменение языка голосового ассистента (языка распознавания речи)
     """
@@ -369,7 +306,6 @@ commands = {
     ("search", "google", "find", "найди"): search_for_term_on_google,
     ("video", "youtube", "watch", "видео"): search_for_video_on_youtube,
     ("wikipedia", "definition", "about", "определение", "википедия"): search_for_definition_on_wikipedia,
-    ("translate", "interpretation", "translation", "перевод", "перевести", "переведи"): get_translation,
     ("language", "язык"): change_language,
     ("weather", "forecast", "погода", "прогноз"): get_weather_forecast
 }
@@ -385,7 +321,7 @@ if __name__ == "__main__":
 
     # настройка данных пользователя
     person = OwnerPerson()
-    person.name = "Andrey"
+    person.name = "White-prince"
     person.home_city = "Moscow"
     person.native_language = "ru"
     person.target_language = "en"
@@ -408,7 +344,6 @@ if __name__ == "__main__":
     while True:
         # старт записи речи с последующим выводом распознанной речи и удалением записанного в микрофон аудио
         voice_input = record_and_recognize_audio()
-        print(voice_input)
         os.remove("microphone-results.wav")
 
         # отделение комманд от дополнительной информации
