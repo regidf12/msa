@@ -37,20 +37,20 @@ class OwnerPerson:
     """
     Информация о владельце
     """
-    name = "Andrey"
+    name = "###"
     home_city = "Moscow"
-    native_language = "ru"
-    target_language = "en"
+    native_language = "en"
+    target_language = "ru"
 
 
 class VoiceAssistant:
     """
     Настройки голосового ассистента
     """
-    name = ""
-    sex = ""
-    speech_language = ""
-    recognition_language = ""
+    name = "Jeanne"
+    sex = "17"
+    speech_language = "en"
+    recognition_language = "ru"
 
 
 def setup_assistant_voice():
@@ -192,7 +192,7 @@ def search_for_term_on_google(*args: tuple):
 
     # поскольку все ошибки предсказать сложно, то будет произведен отлов с последующим выводом без остановки программы
     except:
-        play_voice_assistant_speech(translator.get("Seems like we have a trouble. See logs for more information"))
+        play_voice_assistant_speech(translator.get("Oops"))
         traceback.print_exc()
         return
 
@@ -239,7 +239,7 @@ def search_for_definition_on_wikipedia(*args: tuple):
             webbrowser.get().open(url)
 
     except "":
-        play_voice_assistant_speech(translator.get("Seems like we have a trouble. See logs for more information"))
+        play_voice_assistant_speech(translator.get("Oops"))
         traceback.print_exc()
         return
 
@@ -284,7 +284,7 @@ def get_translation(*args: tuple):
 
     # поскольку все ошибки предсказать сложно, то будет произведен отлов с последующим выводом без остановки программы
     except "":
-        play_voice_assistant_speech(translator.get("Seems like we have a trouble. See logs for more information"))
+        play_voice_assistant_speech(translator.get("Oops"))
         traceback.print_exc()
 
     finally:
@@ -303,7 +303,7 @@ def get_weather_forecast(*args: tuple):
         city_name = person.home_city
 
     try:
-        # использование API-ключа
+        # использование ключа
         weather_api_key = os.getenv("WEATHER_API_KEY")
         open_weather_map = OWM(weather_api_key)
 
@@ -314,7 +314,7 @@ def get_weather_forecast(*args: tuple):
 
     # поскольку все ошибки предсказать сложно, то будет произведен отлов с последующим выводом без остановки программы
     except "":
-        play_voice_assistant_speech(translator.get("Seems like we have a trouble. See logs for more information"))
+        play_voice_assistant_speech(translator.get("Oops"))
         traceback.print_exc()
         return
 
@@ -351,48 +351,6 @@ def change_language(*args: tuple):
     print("Language switched to " + assistant.speech_language)
 
 
-def run_person_through_social_nets_databases(*args: tuple):
-    """
-    Поиск человека по базе данных социальных сетей ВКонтакте и Facebook
-    """
-    if not args[0]: return
-
-    google_search_term = " ".join(args[0])
-    vk_search_term = "_".join(args[0])
-    fb_search_term = "-".join(args[0])
-
-    # открытие ссылки на поисковик в браузере
-    url = "https://google.com/search?q=" + google_search_term + " site: vk.com"
-    webbrowser.get().open(url)
-
-    url = "https://google.com/search?q=" + google_search_term + " site: facebook.com"
-    webbrowser.get().open(url)
-
-    # открытие ссылкок на поисковики социальных сетей в браузере
-    vk_url = "https://vk.com/people/" + vk_search_term
-    webbrowser.get().open(vk_url)
-
-    fb_url = "https://www.facebook.com/public/" + fb_search_term
-    webbrowser.get().open(fb_url)
-
-    play_voice_assistant_speech(translator.get("Here is what I found for {} on social nets").format(google_search_term))
-
-
-def toss_coin(*args: tuple):
-    """
-    "Подбрасывание" монетки для выбора из 2 опций
-    """
-    flips_count, heads, tails = 3, 0, 0
-
-    for flip in range(flips_count):
-        if random.randint(0, 1) == 0:
-            heads += 1
-
-    tails = flips_count - heads
-    winner = "Tails" if tails > heads else "Heads"
-    play_voice_assistant_speech(translator.get(winner) + " " + translator.get("won"))
-
-
 def execute_command_with_name(command_name: str, *args: list):
     """
     Выполнение заданной пользователем команды и аргументами
@@ -405,16 +363,14 @@ def execute_command_with_name(command_name: str, *args: list):
 
 
 commands = {
-    ("hello", "hi", "morning", "привет"): play_greetings,
+    ("hello", "hey", "hi", "morning", "привет"): play_greetings,
     ("bye", "goodbye", "quit", "exit", "stop", "пока"): play_farewell_and_quit,
     ("search", "google", "find", "найди"): search_for_term_on_google,
     ("video", "youtube", "watch", "видео"): search_for_video_on_youtube,
     ("wikipedia", "definition", "about", "определение", "википедия"): search_for_definition_on_wikipedia,
     ("translate", "interpretation", "translation", "перевод", "перевести", "переведи"): get_translation,
     ("language", "язык"): change_language,
-    ("weather", "forecast", "погода", "прогноз"): get_weather_forecast,
-    ("facebook", "person", "run", "пробей", "контакт"): run_person_through_social_nets_databases,
-    ("toss", "coin", "монета", "подбрось", "монетка"): toss_coin,
+    ("weather", "forecast", "погода", "прогноз"): get_weather_forecast
 }
 
 if __name__ == "__main__":
@@ -451,6 +407,7 @@ if __name__ == "__main__":
     while True:
         # старт записи речи с последующим выводом распознанной речи и удалением записанного в микрофон аудио
         voice_input = record_and_recognize_audio()
+        print(voice_input)
         os.remove("microphone-results.wav")
 
         # отделение комманд от дополнительной информации
