@@ -61,7 +61,7 @@ The bot will start listening to you, tell it one of these commands:
     "language", "язык" - Language
     "weather", "forecast", "погода", "прогноз" - Weather
     
-To work with weather command. You will need a key from the owm - ![OpenWeather](https://openweathermap.org/) website, to get it, register on the site.
+To work with weather command. You will need a key from the owm - [OpenWeather](https://openweathermap.org/) website, to get it, register on the site.
 
         try:
         # использование ключа
