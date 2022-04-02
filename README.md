@@ -24,7 +24,6 @@ If you are cloning a project, run it first, otherwise you can download the sourc
 Before launching the bot, you will need to install the aiogram library.
 
     pip install speech_recognition
-    pip install googletrans
     pip install pyttsx3
     pip install wikipediaapi
     pip install webbrowser
