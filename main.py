@@ -215,7 +215,8 @@ def search_for_definition_on_wikipedia(*args: tuple):
     """
     Поиск в Wikipedia определения с последующим озвучиванием результатов и открытием ссылок
     """
-    if not args[0]: return
+    if not args[0]:
+        return
 
     search_term = " ".join(args[0])
 
