@@ -23,18 +23,18 @@ If you are cloning a project, run it first, otherwise you can download the sourc
     
 Before launching the bot, you will need to install the aiogram library.
 
-    pip install speech_recognition
-    pip install googletrans
-    pip install pyttsx3
-    pip install wikipediaapi
-    pip install webbrowser
-    pip install traceback
-    pip install wave
-    pip install dotenv
-    pip install vosk
-    pip install googlesearch
-    pip install pyowm
-    
+    from vosk import Model, KaldiRecognizer
+    from pyowm import OWM
+    from dotenv import load_dotenv
+    import speech_recognition
+    import pyttsx3
+    import wikipediaapi
+    import random
+    import webbrowser
+    import traceback
+    import json
+    import wave
+
 ## Usege :information_source:
 If the library doesn't install, try updating pip or installing pipwin.
 
