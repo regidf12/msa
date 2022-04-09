@@ -1,6 +1,6 @@
 # Welcome to White-prince :crown:
 
-[![White-prince](https://ltdfoto.ru/image/MjpYPG)
+![White-prince](https://ltdfoto.ru/image/MjpYPG)
 
 You can follow me on my social networks:
 
