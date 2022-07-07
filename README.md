@@ -35,7 +35,7 @@ Before launching the bot, you will need to install the aiogram library.
     import webbrowser
     import traceback
     import json
-    import 
+    import wave
 
 ## Usege :information_source:
 If the library doesn't install, try updating pip or installing pipwin.
