@@ -21,7 +21,7 @@ The voice assistant will help you with the simplest tasks.
 ## Installation :gear:
 If you are cloning a project, run it first, otherwise you can download the source on the release page and skip this step.
 
-    git clone https://github.com/White-prince/Moderbot.git
+    https://github.com/White-prince/msa.git
     
 Before launching the bot, you will need to install the aiogram library.
 
