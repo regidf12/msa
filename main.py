@@ -2,13 +2,12 @@ import speech_recognition  # распознание голоса
 from vosk import Model, KaldiRecognizer  # offline mode for Vosk
 import os  # работа с системой
 import wave  # запись
-import json  # js файлы
 import pyttsx3  # синтез речи
 
 
 def setup_assistant_voice():
     """
-     Установка голоса по умолчанию
+     Установка голоса ассистента по умолчанию
     """
     voices = ttsEngine.getProperty("voices")
 
@@ -48,7 +47,7 @@ def record_and_recognize_voice(*args: tuple):
 
     #  offline mode - Vosk
     except speech_recognition.RequestError:
-        print("Trying to use offline recognition...")
+        print("Попытка offline распознавания...")
         recognized_data = offline_recognition()
 
     return recognized_data
@@ -75,7 +74,7 @@ def offline_recognition():
         if len(date) > 0:
             if offline_recognizer.AcceptWaveform(date):
                 recognized_data = offline_recognizer.Result()
-    except:
+    except NameError:
         print('К сожалению, распознание сейчас не возможно')
 
     return recognized_data
