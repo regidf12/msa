@@ -74,4 +74,4 @@ To work with weather command. You will need a key from the owm - [OpenWeather](h
         
 If an oops sound occurs when a command is invoked, check the logs.
 
-Hope this code helps you :crown:
+Hope this code helps you 
