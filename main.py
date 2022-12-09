@@ -80,6 +80,23 @@ def offline_recognition():
     return recognized_data
 
 
+commands = {
+    ("привет", "hi", "hello"): greetings,
+    ("пока", "bye", "goodbye"): check_out,
+}
+
+
+def execute_commands(command_name, *args):
+    """
+    Распознавание и выполнение команд
+    """
+    for key in commands.key():
+        if command_name() in key:
+            commands[key](*args)
+        else:
+            print("Команда не найдена")
+
+
 if __name__ == '__main__':
 
     #  распознавание и ввод речи
@@ -98,6 +115,5 @@ if __name__ == '__main__':
 
         voice_input = voice_input.split(" ")
         command = voice_input[0]
-
-        if command == "привет":
-            play_voice_assistant_speech("Здравствуй")
+        command_options = [str(input_part) for input_part in voice_input[1:len(voice_input)]]
+        execute_commands(command, command_options)
