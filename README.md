@@ -1,6 +1,6 @@
-# Welcome to Immersion :crown:
+# Welcome to Dive-into-dev  :minidisc:
 
- [![White-prince](https://github.com/White-prince/White-prince/blob/main/assets/vk-head-andrew.png?raw=true)](http://white-prince.ru/)
+ [![Dive-into-dev]()]()
 
 You can follow me on my social networks:
 
