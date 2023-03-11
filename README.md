@@ -1,6 +1,6 @@
 # Welcome to Dive-into-dev  :minidisc:
 
- [![Dive-into-dev]()]()
+ [![Dive-into-dev](https://github.com/Dive-dev/Dive-dev/blob/main/assets/VKHeader2.png?raw=true)]()
 
 You can follow me on my social networks:
 
