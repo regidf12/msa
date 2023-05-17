@@ -1,4 +1,4 @@
-# Welcome to Dive-into-dev  :floppy_disk:
+# Welcome to Regidf
 
 # Smart assistant :robot: :loud_sound:
 
