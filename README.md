@@ -1,5 +1,3 @@
-# Welcome to Regidf
-
 # Smart assistant :robot: :loud_sound:
 
 The voice assistant will help you with the simplest tasks.
