@@ -57,5 +57,3 @@ To work with weather command. You will need a key from the owm - [OpenWeather](h
         weather = observation.weather
         
 If an oops sound occurs when a command is invoked, check the logs.
-
-Hope this code helps you
